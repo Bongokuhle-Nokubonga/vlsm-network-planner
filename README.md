@@ -6,13 +6,18 @@ the **Cisco IOS configuration** to build it.
 
 **Try it:** https://bongokuhle-nokubonga.github.io/vlsm-network-planner/
 
+![Tests](https://github.com/Bongokuhle-Nokubonga/vlsm-network-planner/actions/workflows/test.yml/badge.svg)
+
+![VLSM plan for 192.168.10.0/24 with an address space map, subnet table and Cisco IOS config](docs/screenshot.png)
+
 ## What it does
 
 1. **Sizes each subnet** to the smallest block that fits the host count (+2 for network and broadcast).
    50 hosts → /26, 100 hosts → /25, a 2-host WAN link → /30.
 2. **Allocates largest first**, so every block lands on its natural boundary with no overlaps or gaps.
 3. Shows network, mask, gateway, usable range, broadcast and spare addresses for each subnet, plus how
-   much of the network is used and the next free address.
+   much of the network is used and the next free address. A colour-coded **address space map** shows
+   at a glance how the network is divided and how much room is left for growth.
 4. **Generates Cisco IOS config** for a layer-3 switch:
 
 ```
