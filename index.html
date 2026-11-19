@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VLSM Network Planner</title>
+  <meta name="description" content="Split a network into right-sized subnets for each department and get ready-to-paste Cisco IOS VLAN, gateway and DHCP configuration.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <p class="kicker">Networking tool</p>
+      <h1>VLSM Network Planner</h1>
+      <p class="muted">List your departments and how many devices each needs. The planner gives each one a
+        right-sized subnet (largest first, no overlaps) and writes the <strong>Cisco IOS config</strong>:
+        VLANs, gateway interfaces and DHCP pools.</p>
+    </header>
+
+    <form id="form" class="card" autocomplete="off">
+      <div class="grid2">
+        <div>
+          <label for="base">Network to divide</label>
+          <input id="base" value="192.168.10.0/24" spellcheck="false">
+        </div>
+        <div>
+          <label for="dns">DNS server for DHCP</label>
+          <input id="dns" value="8.8.8.8" spellcheck="false">
+        </div>
+      </div>
+
+      <table class="rows" aria-label="Departments">
+        <thead><tr><th>Department / subnet</th><th>Hosts needed</th><th>VLAN <span class="muted">(optional)</span></th><th><span class="sr">Remove</span></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="actions">
+        <button type="button" id="add">+ Add row</button>
+        <span class="muted small">Examples:</span>
+        <button type="button" class="chip" data-example="office">Small office</button>
+        <button type="button" class="chip" data-example="school">School campus</button>
+        <button type="button" class="chip" data-example="tight">Too big to fit</button>
+        <button type="submit" class="primary push">Plan subnets</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+    </form>
+
+    <section id="result" hidden aria-live="polite">
+      <div class="card">
+        <p id="note" class="small muted" hidden></p>
+        <div class="summary">
+          <div><span class="muted small">Network</span><strong id="sBase"></strong></div>
+          <div><span class="muted small">Used</span><strong id="sUsed"></strong></div>
+          <div><span class="muted small">Free</span><strong id="sFree"></strong></div>
+          <div><span class="muted small">Next free address</span><strong id="sNext"></strong></div>
+        </div>
+        <div class="gauge" aria-hidden="true"><div id="bar"></div></div>
+        <div class="table-scroll">
+          <table class="plan">
+            <thead><tr><th>Name</th><th>VLAN</th><th>Hosts</th><th>Subnet</th><th>Mask</th><th>Gateway</th><th>Usable range</th><th>Broadcast</th><th>Spare</th></tr></thead>
+            <tbody id="plan"></tbody>
+          </table>
+        </div>
+        <div class="actions"><button type="button" id="csv">Download CSV</button></div>
+      </div>
+
+      <div class="card">
+        <div class="config-head">
+          <h2>Cisco IOS configuration</h2>
+          <button type="button" id="copy">Copy</button>
+        </div>
+        <pre id="config" tabindex="0"></pre>
+      </div>
+    </section>
+
+    <footer class="muted small">
+      Built by <a href="https://bongokuhle-nokubonga.github.io/portfolio-website/">Nokubonga Nkuna</a> ·
+      <a href="https://github.com/Bongokuhle-Nokubonga/vlsm-network-planner">Source</a> ·
+      <a href="tests.html">Tests</a> ·
+      Pairs with my <a href="https://bongokuhle-nokubonga.github.io/subnet-calculator/">Subnet Calculator</a>
+    </footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

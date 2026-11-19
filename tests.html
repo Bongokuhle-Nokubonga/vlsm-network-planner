@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VLSM Planner Tests</title>
+  <link rel="stylesheet" href="style.css">
+  <style>li.pass { color: #067647; } li.fail { color: var(--error); } ul { font-family: ui-monospace, monospace; font-size: .9rem; }</style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Tests</h1>
+    <p id="summary"><strong>Running…</strong></p>
+    <div class="card"><ul id="list"></ul></div>
+    <p><a href="./">← Back to the planner</a></p>
+  </main>
+  <script type="module">
+    import { cases } from "./tests/cases.js";
+    const list = document.getElementById("list");
+    let failed = 0;
+    for (const [name, fn] of cases) {
+      const li = document.createElement("li");
+      try { fn(); li.textContent = "PASS  " + name; li.className = "pass"; }
+      catch (e) { failed++; li.textContent = "FAIL  " + name + " -> " + e.message; li.className = "fail"; }
+      list.appendChild(li);
+    }
+    document.getElementById("summary").textContent = `${cases.length - failed} passed, ${failed} failed`;
+  </script>
+</body>
+</html>

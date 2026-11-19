@@ -1,0 +1,59 @@
+:root {
+  --bg: #f5f7fb; --surface: #fff; --text: #172033; --muted: #5b6475; --border: #e1e6ef;
+  --accent: #2459d6; --error: #b42318; --code-bg: #0f172a; --code-text: #d7e2f5; --track: #e9edf5;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --surface: #161b24; --text: #e6e9ef; --muted: #98a2b3; --border: #273041;
+    --accent: #6d9bff; --error: #f97066; --code-bg: #0a0e15; --code-text: #c9d6ec; --track: #222a38;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, sans-serif; }
+a { color: var(--accent); }
+.wrap { width: min(1000px, 100% - 32px); margin: 0 auto; padding: 40px 0; }
+.kicker { margin: 0; color: var(--accent); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; }
+h1 { margin: 4px 0 8px; font-size: clamp(1.8rem, 5vw, 2.4rem); letter-spacing: -.02em; }
+h2 { font-size: 1.1rem; margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: .88rem; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin: 18px 0; }
+label { display: block; font-weight: 600; margin-bottom: 6px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+input { width: 100%; padding: 9px 11px; font: inherit; border: 1px solid var(--border); border-radius: 9px; background: var(--bg); color: var(--text); }
+input:focus-visible, button:focus-visible, pre:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button { padding: 8px 14px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { button.primary { color: #08142e; } }
+button.chip { padding: 3px 10px; font-size: .85rem; font-weight: 500; }
+button.remove { padding: 4px 10px; font-size: 1.1rem; line-height: 1; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+.push { margin-left: auto; }
+.error { color: var(--error); margin: 10px 0 0; min-height: 1em; }
+table { width: 100%; border-collapse: collapse; }
+.rows th { text-align: left; font-size: .85rem; color: var(--muted); font-weight: 600; padding: 4px 6px; }
+.rows td { padding: 4px 6px; }
+.rows td:nth-child(2), .rows td:nth-child(3) { width: 22%; }
+.rows td:last-child { width: 1%; }
+.summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.summary div { display: flex; flex-direction: column; }
+.summary strong { font-variant-numeric: tabular-nums; }
+.gauge { height: 10px; background: var(--track); border-radius: 999px; overflow: hidden; margin: 14px 0 6px; }
+#bar { height: 100%; background: var(--accent); border-radius: 999px; transition: width .4s; }
+.table-scroll { overflow-x: auto; margin-top: 10px; }
+.plan { font-size: .9rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.plan th { text-align: left; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); padding: 8px; }
+.plan td { padding: 8px; border-bottom: 1px solid var(--border); }
+.plan td:nth-child(4) { font-weight: 600; }
+.config-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-text); padding: 16px; border-radius: 10px; overflow: auto; max-height: 480px; font: .85rem/1.5 ui-monospace, Consolas, monospace; }
+footer { margin-top: 28px; }
+@media (max-width: 700px) {
+  .grid2, .summary { grid-template-columns: 1fr 1fr; }
+  .push { margin-left: 0; width: 100%; }
+  .rows thead { display: none; }
+  .rows tr { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .rows td { padding: 0; width: auto !important; }
+  .rows td:first-child { grid-column: 1 / -1; }
+}

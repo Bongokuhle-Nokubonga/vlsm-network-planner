@@ -1,0 +1,11 @@
+{
+  "name": "vlsm-network-planner",
+  "version": "1.0.0",
+  "description": "Plan VLSM subnets for departments and generate Cisco IOS VLAN, gateway and DHCP config.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node tests/run.mjs"
+  },
+  "license": "MIT"
+}
